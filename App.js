@@ -6,7 +6,7 @@ export default function App() {
   return (
     <>
       <CategoryScreen />
-      <StatusBar />
+      <StatusBar style='light'/>
     </>
   );
 }
