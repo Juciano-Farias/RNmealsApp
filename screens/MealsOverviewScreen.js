@@ -1,5 +1,8 @@
-import { Text, View, StyleSheet } from 'react-native'
+import { FlatList, View, StyleSheet, Text } from 'react-native'
 import { MEALS } from '../data/dummy-data'
+
+import MealItem from '../components/MealItem'
+
 // import { useRoute } from '@react-navigation/native'
 
 const MealsOverViewScreen = ({ route }) => {
@@ -9,9 +12,21 @@ const MealsOverViewScreen = ({ route }) => {
 
   const { categoryId } = route.params
 
+  function renderMealItem(itemData) {
+    return (
+      <MealItem title={itemData.item.title} />
+    )
+  }
+
+  const displayedMeals = MEALS.filter(mealItem => mealItem.categoryIds.indexOf(categoryId) >= 0)
+  console.log(displayedMeals)
   return ( 
     <View style={styles.container}>
-        <Text>MealsOverViewScreen - {categoryId}</Text>
+        <FlatList 
+          data={displayedMeals}
+          keyExtractor={item => item.id}
+          renderItem={renderMealItem}
+        />
     </View>
   )
 }
