@@ -3,13 +3,18 @@ import { CATEGORIES } from '../data/dummy-data'
 
 import CategoryGridTile from '../components/CategoryGridTile'
 
-function renderCategoryItem(itemData) {
-    return <CategoryGridTile title={itemData.item.title} color={itemData.item.color}/>
-}
 
-const CategoryScreen = () => {
+const CategoryScreen = ({ navigation }) => {
+  function pressHandler() {
+    navigation.navigate('MealsOverview')
+  }
+  function renderCategoryItem(itemData) {
+    
+    return <CategoryGridTile onPress={pressHandler} title={itemData.item.title} color={itemData.item.color}/>
+  }
+
   return (
-    <FlatList 
+    <FlatList  
         data={CATEGORIES}
         renderItem={renderCategoryItem}
         keyExtractor={(item) => item.id}
