@@ -1,6 +1,15 @@
 import { Pressable, View, Text, StyleSheet, Platform } from "react-native"
+import { useNavigation } from '@react-navigation/native'
 
-const CategoryGridTile = ({ title, color }) => {
+const CategoryGridTile = ({ title, color, onPress }) => {
+  // const navigation = useNavigation()
+
+  // function navigateHandler() {
+  //   navigation.navigate('MealsOverview')
+  // }
+  // If i would want to nagivate throught a simple component (not a screen component that recives the navigate props throught the Stack.Screen component) i can use the useNavigation hook to get the navigation object and use in the component
+  // Or i could pass the navigation prop throught the screen component, that's an another approche to solve the same issue
+
   return (
     <View style={styles.gridItem}>
         <Pressable
@@ -8,6 +17,7 @@ const CategoryGridTile = ({ title, color }) => {
           style={({ pressed }) => [
             styles.button, pressed ? styles.buttonPressed : null
           ]}
+          onPress={onPress}
         >
             <View style={[styles.innerContainer, {backgroundColor: color}]}>
                 <Text style={styles.title}>{title}</Text>
