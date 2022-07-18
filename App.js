@@ -29,7 +29,17 @@ export default function App() {
               title: 'All Categories',
             }}
           />          
-          <Stack.Screen name="MealsOverview" component={MealsOverViewScreen} />          
+          <Stack.Screen
+            name="MealsOverview"
+            component={MealsOverViewScreen}
+            // options={({ route, navigation }) => {
+            //   const catId = route.params.categoryId // route object was passed as a parameter on CategoryScreen.js on the navigation object
+            //   return {
+            //     title: catId
+            //   }
+            // }}
+            // an approche to pass options to each screen
+          />          
         </Stack.Navigator>
       </NavigationContainer>
     </>
