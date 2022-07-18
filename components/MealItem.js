@@ -2,6 +2,7 @@ import { Text, Pressable, View, Image, StyleSheet, Platform } from "react-native
 import { useNavigation } from "@react-navigation/native"
 
 import Shadow from './Shadow'
+import MealDetails from './MealDetails'
 
 const MealItem = ({ id, title, imageUrl, duration, complexity, affordability }) => {
   const navigation = useNavigation()
@@ -24,11 +25,11 @@ const MealItem = ({ id, title, imageUrl, duration, complexity, affordability }) 
               <Image source={{ uri: imageUrl }} style={styles.image} />
               <Text style={styles.title}>{title}</Text>
             </View>
-            <View style={styles.details}>
-              <Text style={styles.detailItem}>{duration}</Text>
-              <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-              <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
-            </View>
+            <MealDetails
+              affordability={affordability}
+              complexity={complexity}
+              duration={duration}
+            />
           </View>
         </Pressable>
     </Shadow>
