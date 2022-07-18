@@ -1,11 +1,12 @@
+import { useLayoutEffect } from 'react'
 import { FlatList, View, StyleSheet, Text } from 'react-native'
-import { MEALS } from '../data/dummy-data'
+import { MEALS, CATEGORIES } from '../data/dummy-data'
 
 import MealItem from '../components/MealItem'
 
 // import { useRoute } from '@react-navigation/native'
 
-const MealsOverViewScreen = ({ route }) => {
+const MealsOverViewScreen = ({ route, navigation }) => {
   // const route = useRoute()
   // const { categoryId } = route.params
   // can be used in nested components which is not registered as a screen (useRoute)
@@ -26,6 +27,15 @@ const MealsOverViewScreen = ({ route }) => {
       <MealItem {...mealsItemProps}/>
     )
   }
+
+  useLayoutEffect(() => {
+    const categoryTitle = CATEGORIES.find(
+      (category) => category.id === categoryId).title
+
+    navigation.setOptions({
+      title: categoryTitle
+    })
+  },[categoryId, navigation])
 
   const displayedMeals = MEALS.filter(mealItem => mealItem.categoryIds.indexOf(categoryId) >= 0)
   return ( 
