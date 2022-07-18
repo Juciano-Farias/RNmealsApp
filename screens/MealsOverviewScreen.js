@@ -17,6 +17,7 @@ const MealsOverViewScreen = ({ route, navigation }) => {
     const item = itemData.item
 
     const mealsItemProps = {
+      id: item.id,
       title: item.title,
       imageUrl: item.imageUrl,
       affordability: item.affordability,
