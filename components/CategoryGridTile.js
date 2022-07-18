@@ -1,6 +1,8 @@
 import { Pressable, View, Text, StyleSheet, Platform } from "react-native"
 import { useNavigation } from '@react-navigation/native'
 
+import Shadow from './Shadow'
+
 const CategoryGridTile = ({ title, color, onPress }) => {
   // const navigation = useNavigation()
 
@@ -11,7 +13,7 @@ const CategoryGridTile = ({ title, color, onPress }) => {
   // Or i could pass the navigation prop throught the screen component, that's an another approche to solve the same issue
 
   return (
-    <View style={styles.gridItem}>
+    <Shadow style={styles.gridItem}>
         <Pressable
           android_ripple={{ color: '#fff' }}
           style={({ pressed }) => [
@@ -23,7 +25,7 @@ const CategoryGridTile = ({ title, color, onPress }) => {
                 <Text style={styles.title}>{title}</Text>
             </View>
         </Pressable>
-    </View>
+    </Shadow>
   )
 }
 
@@ -32,16 +34,7 @@ export default CategoryGridTile
 const styles = StyleSheet.create({
   gridItem: {
     flex: 1,
-    margin: 16,
-    height: 150,
-    borderRadius: 8,
-    elevation: 4,
-    backgroundColor: 'white', // For IOS shadows you need to add a background color, even if it's just 'white'
-    shadowColor: 'black',
-    shadowOpacity: .25,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    overflow: Platform.OS === 'android' ? 'hidden' : 'visible', // For IOS you can't use overflow hidden, because it'll hide your shadows
+    height: 150,  
   },
   button: {
     flex: 1,
