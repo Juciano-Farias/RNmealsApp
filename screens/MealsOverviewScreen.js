@@ -13,13 +13,21 @@ const MealsOverViewScreen = ({ route }) => {
   const { categoryId } = route.params
 
   function renderMealItem(itemData) {
+    const item = itemData.item
+
+    const mealsItemProps = {
+      title: item.title,
+      imageUrl: item.imageUrl,
+      affordability: item.affordability,
+      complexity: item.complexity,
+      duration: item.duration,
+    }
     return (
-      <MealItem title={itemData.item.title} />
+      <MealItem {...mealsItemProps}/>
     )
   }
 
   const displayedMeals = MEALS.filter(mealItem => mealItem.categoryIds.indexOf(categoryId) >= 0)
-  console.log(displayedMeals)
   return ( 
     <View style={styles.container}>
         <FlatList 
