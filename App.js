@@ -1,13 +1,30 @@
+import 'react-native-gesture-handler';
 import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
 import CategoryScreen from './screens/CategoryScreen';
 import MealsOverViewScreen from './screens/MealsOverviewScreen';
 import MealDetailScreen from './screens/MealDetailScreen';
+import FavoriteScreen from './screens/FavoriteScreen'
 
 const Stack = createNativeStackNavigator()
+const Drawer = createDrawerNavigator()
+
+function DrawerNavigator() {
+  return <Drawer.Navigator 
+      screenOptions={{
+      headerStyle: { backgroundColor: '#351401' },
+      headerTintColor: 'white',
+      sceneContainerStyle: { backgroundColor: '#3f2f25' },
+      headerTitleAlign: "center",
+    }}>
+    <Drawer.Screen name="Categories" component={CategoryScreen} options={{ title: 'All Categories' }}/>
+    <Drawer.Screen name="FavoritesScreen" component={FavoriteScreen} />
+  </Drawer.Navigator>
+}
 
 export default function App() {
   return ( 
@@ -16,7 +33,6 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={{
-            title: 'All Categories',
             headerStyle: { backgroundColor: '#351401' },
             headerTintColor: 'white',
             contentStyle: { backgroundColor: '#3f2f25' },
@@ -24,26 +40,20 @@ export default function App() {
             }}
         >
           <Stack.Screen
-            name="MealsCategories"
-            component={CategoryScreen}
+            name="Drawer"
+            component={DrawerNavigator}
             options={{
-              title: 'All Categories',
+              headerShown: false,
             }}
           />          
           <Stack.Screen
             name="MealsOverview"
             component={MealsOverViewScreen}
-            // options={({ route, navigation }) => {
-            //   const catId = route.params.categoryId // route object was passed as a parameter on CategoryScreen.js on the navigation object
-            //   return {
-            //     title: catId
-            //   }
-            // }}
-            // an approche to pass options to each screen
           />
           <Stack.Screen
             name="MealsDetail"
             component={MealDetailScreen}
+            options={{ title: 'About the meal' }}
           />    
         </Stack.Navigator>
       </NavigationContainer>
