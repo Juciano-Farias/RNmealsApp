@@ -31,12 +31,16 @@ function DrawerNavigator() {
       component={CategoryScreen}
       options={{
         title: 'All Categories',
-        drawerIcon: ({ color, size }) => {<Ionicons color={color} size={size} name="list" />}
+        drawerIcon: ({ color, size }) => (<Ionicons color={color} size={size} name="list" />)
       }}
     />
     <Drawer.Screen
       name="FavoritesScreen"
       component={FavoriteScreen}
+      options={{
+        title: 'Favorites meals',
+        drawerIcon: ({ color, size }) => (<Ionicons color={color} size={size} name="star" />)
+      }}
     />
   </Drawer.Navigator>
 }
