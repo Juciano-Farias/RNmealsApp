@@ -1,8 +1,7 @@
 import { useLayoutEffect } from 'react'
-import { FlatList, View, StyleSheet, Text } from 'react-native'
 import { MEALS, CATEGORIES } from '../data/dummy-data'
 
-import MealItem from '../components/MealItem'
+import MealsList from '../components/MealsList/MealsList'
 
 // import { useRoute } from '@react-navigation/native'
 
@@ -12,22 +11,6 @@ const MealsOverViewScreen = ({ route, navigation }) => {
   // can be used in nested components which is not registered as a screen (useRoute)
 
   const { categoryId } = route.params
-
-  function renderMealItem(itemData) {
-    const item = itemData.item
-
-    const mealsItemProps = {
-      id: item.id,
-      title: item.title,
-      imageUrl: item.imageUrl,
-      affordability: item.affordability,
-      complexity: item.complexity,
-      duration: item.duration,
-    }
-    return (
-      <MealItem {...mealsItemProps}/>
-    )
-  }
 
   useLayoutEffect(() => {
     const categoryTitle = CATEGORIES.find(
@@ -39,22 +22,8 @@ const MealsOverViewScreen = ({ route, navigation }) => {
   },[categoryId, navigation])
 
   const displayedMeals = MEALS.filter(mealItem => mealItem.categoryIds.indexOf(categoryId) >= 0)
-  return ( 
-    <View style={styles.container}>
-        <FlatList 
-          data={displayedMeals}
-          keyExtractor={item => item.id}
-          renderItem={renderMealItem}
-        />
-    </View>
-  )
+
+  return <MealsList items={displayedMeals}/>
 }
 
 export default MealsOverViewScreen
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 16,
-    },
-})
