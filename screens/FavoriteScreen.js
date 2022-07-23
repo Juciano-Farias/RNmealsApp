@@ -1,16 +1,18 @@
-import { useContext } from 'react'
-import { FavoritesContext } from '../store/context/favorite-context'
-import { MealsList } from '../components/MealsList/MealsList'
-import { MEALS } from '../data/dummy-data'
+import { useContext } from "react";
+import { FavoritesContext } from "../store/context/favorite-context";
+import MealsList from "../components/MealsList/MealsList";
+import { MEALS } from "../data/dummy-data";
 
 const FavoriteScreen = () => {
-  const favoriteMealsContext = useContext(FavoritesContext)
+  const favoriteMealsContext = useContext(FavoritesContext);
 
-  const favoriteMeals = MEALS.filter(meal => favoriteMealsContext.ids.includes(meal))
+  const favoriteMeals = MEALS.filter((meal) =>
+    favoriteMealsContext.ids.includes(meal.id)
+  );
 
-  return (
-    <MealsList items={favoriteMeals}/>
-  )
-}
+  console.log(favoriteMealsContext.ids, favoriteMeals);
 
-export default FavoriteScreen
+  return <MealsList items={favoriteMeals} />;
+};
+
+export default FavoriteScreen;
